@@ -1,10 +1,5 @@
 <?php if ( ! defined( 'PREMIUMGENERATOR_VERSION' ) ) exit( 'No direct script access allowed' );
 
-
-die( 'Not avariable at moment' );
-
-
-
 class PremiumGenerator_Hoster_Uploading extends PremiumGenerator_Hoster {
 
 	const VERSION 	= '0.0.1-community';
@@ -55,7 +50,10 @@ class PremiumGenerator_Hoster_Uploading extends PremiumGenerator_Hoster {
 	
 	// --------------------------------------------------------------------
 	
-	public function is_premium( $link );
+	public function is_premium( $link )
+	{
+		
+	}
 	
 	// --------------------------------------------------------------------
 	
