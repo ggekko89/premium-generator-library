@@ -20,13 +20,13 @@ class PremiumGenerator_Hoster_Megavideo extends PremiumGenerator_Hoster {
 	private $logout_url = 'http://www.megavideo.com/?logout=1';
 	private $player_url = 'http://www.megavideo.com/xml/player_login.php';
 	
-	private $standard_regex = '/http:\/\/([a-z0-9]+)\.megavideo\.com\/\?v=([A-Z0-9]{8})/i';
-	private $premium_regex = '/http:\/\/([a-z0-9]+)\.megavideo\.com\/files\/([a-z0-9]{32})\/(.+)/i';
+	private $standard_regex = '/http:\/\/(|[a-z0-9.]+)megavideo\.com\/\?v=([A-Z0-9]{8})/i';
+	private $premium_regex = '/http:\/\/(|[a-z0-9.]+)megavideo\.com\/files\/([a-z0-9]{32})\/(.+)/i';
 	private $filename_regex = '';
 	
 	private $online_error_regex = 'This video has been removed due to infringement.';
 	
-	private $login_regex = 'Premium';
+	private $login_regex = 'flashvars.status = "premium";';
 	private $generate_regex = '|downloadurl="(.+)"|U';
 	private $user_id_regex = '|flashvars.userid = "(.+)";|U';
 	
@@ -75,9 +75,9 @@ class PremiumGenerator_Hoster_Megavideo extends PremiumGenerator_Hoster {
 	public function login( $username = '', $password = '' )
 	{
 		$post_data = array(
-			'nickname'	=> ( $username ? $username : $this->user ),
+			'username'	=> ( $username ? $username : $this->user ),
 			'password'	=> ( $password ? $password : $this->pass ),
-			'action'	=> "login"
+			'login'		=> "1"
 		);
 		
 		$r = $this->request->post( $this->login_url, $post_data );
@@ -108,14 +108,14 @@ class PremiumGenerator_Hoster_Megavideo extends PremiumGenerator_Hoster {
 
 	public function generate( $link )
 	{
-		$user_id = $this->get_user_id( $link );
-		$link_id = $this->get_link_id( $link );
-
 		// Controllo che il link sia valido.
 		if ( ! $this->is_standard( $link ) )
 		{
 			return 'invalid-id';
 		}
+		
+		$user_id = $this->get_user_id( $link );
+		$link_id = $this->get_link_id( $link );
 		
 		// Controllo che l'utente sia premium e che il video esista.
 		if ( ! $user_id )
@@ -137,9 +137,9 @@ class PremiumGenerator_Hoster_Megavideo extends PremiumGenerator_Hoster {
 	
 	// --------------------------------------------------------------------
 	
-	private function get_user_id($link)
+	private function get_user_id( $link )
 	{
-		$r = $this->request->get($link);
+		$r = $this->request->get( $link );
 		
 		if ( ! isset( $r->body ) )
 		{
@@ -153,9 +153,9 @@ class PremiumGenerator_Hoster_Megavideo extends PremiumGenerator_Hoster {
 	
 	// --------------------------------------------------------------------
 	
-	private function get_link_id($url)
+	private function get_link_id( $link )
 	{
-		preg_match( $this->standard_regex, $url, $result );
+		preg_match( $this->standard_regex, $link, $result );
 		return isset( $result[2] ) ? $result[2] : FALSE;
 	}
 	
