@@ -26,7 +26,7 @@ class PremiumGenerator_Hoster_VideoBB extends PremiumGenerator_Hoster {
 	// http://s95.videobb.com/d2?v=VnheyW2xautk&t=1300548181&u=piciolo&c=76cdcb3adbbed3bbcebcd759c6dcc014&d=http%3A//videobb.com/video/VnheyW2xautk
 	private $filename_regex = '';
 	
-	private $online_error_regex = 'has been removed due to infringement';
+	private $online_error_regex = 'The video you have requested is not available';
 	
 	private $login_regex = '<b class="pre">Premium</b>';
 	
@@ -126,11 +126,13 @@ class PremiumGenerator_Hoster_VideoBB extends PremiumGenerator_Hoster {
 		}
 		
 		
-		//$r = $this->request->get( $link );
 		$video_id = $this->get_video_id( $link );
-		$r = $this->request->get( "{$this->player_url}?v={$video_id}&em=TRUE&sd=www.videobb.com" );
+		$this->request->follow_redirects = TRUE;
+		//$r = $this->request->get( "{$this->player_url}?v={$video_id}&em=TRUE&sd=www.videobb.com" );
+		$r = $this->request->get( "http://videobb.com/player_control/settings.php?v={$video_id}&fv=v1.1.55" );
 		
-		print_r( $r ); exit;
+		print( urldecode( 'checkpromotion=0&data=%5B%7B%22i%22%3A%220e41c5609b9aea50d0b42312400f1e3f%22%2C%22t%22%3A1300555093%2C%22u%22%3A%22piciolo%22%2C%22c%22%3A%220b578aa5728e1c50811a472abb3992f7%22%2C%22v%22%3A%22VnheyW2xautk%22%2C%22ac%22%3A%2234%22%2C%22ut%22%3A%222%22%7D%5D' ) ); exit;
+		print_r( json_decode( $r->body ) ); exit;
 
 		if ( ! isset( $r->body ) )
 		{
@@ -169,6 +171,6 @@ class PremiumGenerator_Hoster_VideoBB extends PremiumGenerator_Hoster {
 	private function get_video_id( $link )
 	{
 		preg_match( $this->standard_regex, $link, $result );
-		return isset( $result[2] ) ? TRUE : FALSE;
+		return isset( $result[2] ) ? $result[2] : '';
 	}
 }
