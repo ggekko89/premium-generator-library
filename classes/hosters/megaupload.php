@@ -20,8 +20,8 @@ class PremiumGenerator_Hoster_Megaupload extends PremiumGenerator_Hoster {
 	private $login_url = 'http://www.megaupload.com/?c=login';
 	private $logout_url = 'http://www.megaupload.com';
 	
-	private $standard_regex = '/http:\/\/([a-z0-9]+)\.megaupload\.com\/(|[a-z]{2}\/)\?d=([A-Z0-9]{8})/i';
-	private $premium_regex = '/http:\/\/([a-z0-9]+)\.megaupload\.com\/files\/([a-z0-9]{32})\/(.+)/i';
+	private $standard_regex = '/http:\/\/(|[a-z0-9.]+)megaupload\.com\/(|[a-z]{2}\/)\?d=([A-Z0-9]{8})/i';
+	private $premium_regex = '/http:\/\/(|[a-z0-9.]+)megaupload\.com\/files\/([a-z0-9]{32})\/(.+)/i';
 	private $filename_regex = '';
 	
 	private $online_error_regex = 'has been removed due to infringement';
