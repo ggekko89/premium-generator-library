@@ -19,9 +19,9 @@ class PremiumGenerator_Hoster_Hotfile extends PremiumGenerator_Hoster {
 	
 	private $login_url = 'http://hotfile.com/login.php';
 	private $logout_url = 'http://hotfile.com/logout.php';
-	
-	private $standard_regex = '/http:\/\/hotfile\.com\/dl\/([0-9]{8})\/([a-z0-9]{7})\/(.+)/i';
-	private $premium_regex = '/http:\/\/hotfile\.com\/get\/([0-9]{8})\/([a-z0-9]{8})\/([a-z0-9]{7})\/(.+)/i';
+
+	private $standard_regex = '/http:\/\/(|[a-z0-9.]+)hotfile\.com\/dl\/([0-9]{8})\/([a-z0-9]{7})\/(.+)/i';
+	private $premium_regex = '/http:\/\/(|[a-z0-9.]+)hotfile\.com\/get\/([a-z0-9]{40})\/([a-z0-9]{8})\/([0-9]{1})\/([a-z0-9]{16})\/([a-z0-9]{7})\/([0-9]{7})\/(.+)/i';
 	private $filename_regex = '';
 	
 	private $online_error_regex = 'has been removed due to infringement';
@@ -112,12 +112,21 @@ class PremiumGenerator_Hoster_Hotfile extends PremiumGenerator_Hoster {
 		{
 			return 'invalid-id';
 		}
+		
+		$this->request->follow_redirects = FALSE;
 
-		$r = $this->request->post( $link );
+		$r = $this->request->get( $link );
+		
+		//print_r( $r ); exit;
 		
 		if ( ! isset( $r->body ) OR $r->body == 'failed' )
 		{
 			return 'no-response';
+		}
+		
+		if ( $r->headers['Status-Code'] == 302 )
+		{
+			return $r->headers['Location'];
 		}
 		
 		if ( $r->headers['Status-Code'] == 200 )
