@@ -5,6 +5,10 @@ abstract class PremiumGenerator_Hoster
 	public $request;
 	public $request_class;
 	
+	public $user;
+	public $pass;
+	public $cookie_file;
+	
 	public function initialize( array $config = array() )
 	{
 		if ( ! empty( $config ) )
