@@ -173,7 +173,7 @@ if ( $hf_onoff )
 
 /* ---------- VideoBB ---------- */
 
-$vbb_onoff = true;
+$vbb_onoff = false;
 
 if ( $vbb_onoff )
 {
