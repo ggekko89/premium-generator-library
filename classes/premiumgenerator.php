@@ -14,7 +14,7 @@
  * @filesource
  */
 
-define( 'PREMIUMGENERATOR_VERSION', "0.0.1-community" );
+define( 'PREMIUMGENERATOR_VERSION', "0.0.2-community" );
 	
 require dirname( __FILE__ ) . '/hoster.php';
 require dirname( __FILE__ ) . '/simple_html_dom.php';
