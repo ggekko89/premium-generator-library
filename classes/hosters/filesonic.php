@@ -1,16 +1,44 @@
 <?php if ( ! defined( 'PREMIUMGENERATOR_VERSION' ) ) exit( 'No direct script access allowed' );
 
+/**
+ * Premium Generator Library
+ *
+ * An open source library for generate premium links from File Hosters.
+ *
+ * @package		PremiumGenerator
+ * @author		Namaless
+ * @copyright	Copyright (c) 1981 - 2011, Namaless
+ * @license		
+ * @link		http://www.premium-generators.com
+ * @since		Version 0.0.1
+ * @filesource
+ */
+
+/**
+ * PremiumGenerator_Hoster_FileSonic Class
+ *
+ * This is hoster class of hosters management.
+ *
+ * @package		PremiumGenerator
+ * @subpackage	Libraries
+ * @category	Hoster
+ * @author		Namaless
+ * @version		0.0.1-community
+ * @link		http://userguide.premium-generators.com/hosters/filesonic
+ */
+
 class PremiumGenerator_Hoster_FileSonic extends PremiumGenerator_Hoster {
 
 	const VERSION 	= '0.0.1-community';
-	const NAME 		= 'FilesOnic';
+	const NAME 		= 'FileSonic';
 	const URL 		= 'http://www.filesonic.com';
 	const DESC 		= '';
 	const AUTHOR 			= 'Namaless';
 	const AUTHOR_EMAIL 		= 'namaless@gmail.com';
 	const AUTHOR_WEBSITE 	= 'http://www.namaless.com/';
 
-
+	// --------------------------------------------------------------------
+	
 	public $request_class = 'curl';
 	
 	public $referer = 'http://filesonic.com';

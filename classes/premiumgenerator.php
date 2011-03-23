@@ -19,7 +19,7 @@ define( 'PREMIUMGENERATOR_VERSION', "0.0.2-community" );
 require dirname( __FILE__ ) . '/hoster.php';
 require dirname( __FILE__ ) . '/simple_html_dom.php';
 
-// ------------------------------------------------------------------------
+// --------------------------------------------------------------------
 
 /**
  * PremiumGenerator Class
@@ -37,14 +37,14 @@ final class PremiumGenerator {
 
 	public static $hosters = array();
 	
-	// ------------------------------------------------------------------------
+	// --------------------------------------------------------------------
 	
 	public static function error( $message, $code = 0 )
 	{
 		throw new Exception( $message, $code );
 	}
 	
-	// ------------------------------------------------------------------------
+	// --------------------------------------------------------------------
 	
 	public static function exception( Exception $e )
 	{
@@ -52,7 +52,7 @@ final class PremiumGenerator {
 		exit;
 	}
 	
-	// ------------------------------------------------------------------------
+	// --------------------------------------------------------------------
 	
 	public static function factory( $hoster, array $config = array() )
 	{
@@ -117,5 +117,5 @@ final class PremiumGenerator {
 		return self::$hosters[$hoster];
 	}
 	
-	// ------------------------------------------------------------------------
+	// --------------------------------------------------------------------
 }

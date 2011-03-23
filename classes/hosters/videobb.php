@@ -1,5 +1,32 @@
 <?php if ( ! defined( 'PREMIUMGENERATOR_VERSION' ) ) exit( 'No direct script access allowed' );
 
+/**
+ * Premium Generator Library
+ *
+ * An open source library for generate premium links from File Hosters.
+ *
+ * @package		PremiumGenerator
+ * @author		Namaless
+ * @copyright	Copyright (c) 1981 - 2011, Namaless
+ * @license		
+ * @link		http://www.premium-generators.com
+ * @since		Version 0.0.1
+ * @filesource
+ */
+
+/**
+ * PremiumGenerator_Hoster_VideoBB Class
+ *
+ * This is hoster class of hosters management.
+ *
+ * @package		PremiumGenerator
+ * @subpackage	Libraries
+ * @category	Hoster
+ * @author		Namaless
+ * @version		0.0.1-community
+ * @link		http://userguide.premium-generators.com/hosters/videobb
+ */
+
 class PremiumGenerator_Hoster_VideoBB extends PremiumGenerator_Hoster {
 
 	const VERSION 	= '0.0.1-community';
@@ -10,6 +37,7 @@ class PremiumGenerator_Hoster_VideoBB extends PremiumGenerator_Hoster {
 	const AUTHOR_EMAIL 		= 'namaless@gmail.com';
 	const AUTHOR_WEBSITE 	= 'http://www.namaless.com/';
 	
+	// --------------------------------------------------------------------
 	
 	public $request_class = 'curl';
 	
@@ -173,4 +201,6 @@ class PremiumGenerator_Hoster_VideoBB extends PremiumGenerator_Hoster {
 		preg_match( $this->standard_regex, $link, $result );
 		return isset( $result[2] ) ? $result[2] : '';
 	}
+	
+	// --------------------------------------------------------------------
 }
